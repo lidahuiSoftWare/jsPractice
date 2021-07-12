@@ -7,6 +7,7 @@ function App() {
   const [previewImg, setPreviewImg] = useState(null);
   const canvasRef = useRef(null);
 
+  /**监听图片并预览图片 */
   function onInputChange(event) {
     const file = event.target.files[0];
     const fileReader = new FileReader();
@@ -17,6 +18,7 @@ function App() {
     fileReader.readAsDataURL(file);
   }
 
+  /** 使用canvas 对图片进行加工为灰色图片 */
   function drawImageData (imgUrl) {
     let context2d = null;
     let drawing = canvasRef.current
@@ -35,7 +37,8 @@ function App() {
 
     let imagedata = context2d.getImageData(0, 0, 200, 200);
     let data = imagedata.data;
-    let i,len,red,green,blue,average;  
+    let i,len,red,green,blue,average; 
+    /** 对图片颜色进行加工 */ 
     for (i = 0 , len = data.length; i < len; i+=4) {
         red = data[i];
         green = data[i + 1];
@@ -49,6 +52,7 @@ function App() {
     context2d.putImageData(imagedata, 0, 0);
   }
 
+  /** 下载图片 */
   function downLoadImg(){
     let dataImg = new Image();
       dataImg.src = canvasRef.current.toDataURL("image/png");
