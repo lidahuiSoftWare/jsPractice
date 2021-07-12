@@ -82,8 +82,8 @@ function baseDecode(decodeNum, base = 64, precision = 4) {
 // 测试进制转换
 (()=> {
     const str = baseConver(129.1200);
-    console.log("129.12 对应的64进制",str);
-    console.log(str, "对应的10进制数为：", baseDecode(str));
+    console.log("129.12 对应的64进制",str); // 129.12 对应的64进制 21.7Hxh
+    console.log(str, "对应的10进制数为：", baseDecode(str)); // 21.7Hxh 对应的10进制数为： 129.1200
 })();
 
 
