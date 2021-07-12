@@ -14,13 +14,17 @@ function baseConver(decNumber, base = 64, precision = 4) {
     let abDecNumber = Math.abs(decNumber); // 转换为绝对值
     let intergerPart = parseInt(abDecNumber); // 整数部分
     let decimalPart = abDecNumber - intergerPart; // 小数部分
-    let targetInterPart = ""; 
-    let targetDecimalPart = '';
+    let targetInterPart = "";  // 转后前整数进制字符串队列
+    let targetDecimalPart = ''; //转换前小数进制字符串队列
 
     /** 整数部分转换 */
     while(intergerPart > 0) { 
         let modNum = intergerPart % base;
         intergerPart = parseInt(intergerPart / base );
+        /**
+         * digits[modNum] 将余数转换为进制的编码
+         * 整数部分为栈的方式入队，后进的进制编码在队首
+         */
         targetInterPart = digits[modNum] + targetInterPart; 
     }
 
@@ -29,6 +33,10 @@ function baseConver(decNumber, base = 64, precision = 4) {
         decimalPart = decimalPart * base;
         let intererTemp = parseInt(decimalPart);
         decimalPart -= intererTemp;
+         /**
+         * digits[modNum] 将余数转换为进制的编码
+         * 后续转换的进制，加入队列尾部即可
+         */
         targetDecimalPart = targetDecimalPart + digits[intererTemp];
     }
 
@@ -50,7 +58,7 @@ function baseDecode(decodeNum, base = 64, precision = 4) {
     }
 
     decodeNum = decodeNum.toString();
-    const plus =  decodeNum.indexOf("-") >= 0;
+    const plus =  decodeNum.indexOf("-") >= 0; // true 为 负数
     const abDecodeNum = plus ? decodeNum.slice(1) : decodeNum;
 
     const [intergerStr, decimalStr] = abDecodeNum.split(".");
@@ -61,7 +69,7 @@ function baseDecode(decodeNum, base = 64, precision = 4) {
         let length = intergerStr.length;
         let power = 0;
         while(length--) {
-            let num = digits.indexOf(intergerStr.charAt(length));
+            let num = digits.indexOf(intergerStr.charAt(length)); // 将字母或者数字同一转换为数字
             if (num > 0) {
                 target = target + num *  Math.pow(base, power++);
             }
