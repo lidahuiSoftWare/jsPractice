@@ -11,28 +11,29 @@ function baseConver(decNumber, base = 64, precision = 4) {
     if (!(base >= 2 && base <= 64)) {
         return null;
     }
-    let abDecNumber = Math.abs(decNumber);
-    let targetInterPart = "";
+    let abDecNumber = Math.abs(decNumber); // 转换为绝对值
+    let intergerPart = parseInt(abDecNumber); // 整数部分
+    let decimalPart = abDecNumber - intergerPart; // 小数部分
+    let targetInterPart = ""; 
     let targetDecimalPart = '';
 
-    let intergerPart = parseInt(abDecNumber);
-    let decimalPart = abDecNumber - intergerPart;
-
-    while(intergerPart > 0){
+    /** 整数部分转换 */
+    while(intergerPart > 0) { 
         let modNum = intergerPart % base;
         intergerPart = parseInt(intergerPart / base );
-        targetInterPart = digits[modNum] + targetInterPart;
+        targetInterPart = digits[modNum] + targetInterPart; 
     }
 
+    /** 小时部分转换 */
     for (let i = precision; i--;) {
         decimalPart = decimalPart * base;
         let intererTemp = parseInt(decimalPart);
         decimalPart -= intererTemp;
         targetDecimalPart = targetDecimalPart + digits[intererTemp];
     }
-    return decNumber > 0 ? 
-         targetInterPart + "." + targetDecimalPart :
-         "-" + targetInterPart + "." + targetDecimalPart 
+
+    const target = targetInterPart + "." + targetDecimalPart;
+    return decNumber > 0 ? target : "-" + target; 
 }
 
 /**
