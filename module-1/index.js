@@ -61,7 +61,9 @@ function baseDecode(decodeNum, base = 64, precision = 4) {
         let power = 0;
         while(length--) {
             let num = digits.indexOf(intergerStr.charAt(length));
-            target = target + num *  Math.pow(base, power++);
+            if (num > 0) {
+                target = target + num *  Math.pow(base, power++);
+            }
         }
     }
 
