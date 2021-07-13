@@ -21,17 +21,15 @@ function App() {
   /** 使用canvas 对图片进行加工为灰色图片 */
   function drawImageData (imgUrl) {
     let context2d = null;
-    let drawing = canvasRef.current
+    let drawing = canvasRef.current;
+
     if(drawing.getContext) {
         context2d = drawing.getContext('2d');
     }
-
     if (context2d == null) {
         return;
     }
-
-    let image = previewImgRef.current;
-    image = document.createElement("img");
+    let image = document.createElement("img");
     image.src = imgUrl;
     context2d.drawImage(image, 0, 0, 200, 200);
 
