@@ -1,0 +1,18 @@
+.arraySort {
+  margin: 20px;
+}
+
+.optionWrap {
+  display:  flex;
+  margin-bottom: 20px;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.numShow {
+  margin-top: 20px;
+}

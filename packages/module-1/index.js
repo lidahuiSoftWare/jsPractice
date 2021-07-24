@@ -56,7 +56,7 @@ function baseDecode(decodeNum, base = 64, precision = 4) {
     if (!(base >= 2 && base <= 64)) {
         return null;
     }
-
+ 
     decodeNum = decodeNum.toString();
     const plus =  decodeNum.indexOf("-") >= 0; // true 为 负数
     const abDecodeNum = plus ? decodeNum.slice(1) : decodeNum;
